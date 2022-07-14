@@ -3,67 +3,52 @@ import './style.css';
 
 let input = document.getElementById('input');
 let dataBase = [];
-let newTask;
 
 class Todolist {
-  contstructor() {
-    this.task = task;
+  constructor(description, completed, index) {
+    this.description = description;
+    this.completed = completed;
+    this.index = index;
   }
 
-  addTask() {
+  addtask() {
     dataBase.push(this);
   }
 
-  displayTask() {
-    const containerList = document.getElementById('items');
+  displaytask() {
+    const container = document.getElementById('items');
 
     const unsortedList = document.createElement('ul');
     unsortedList.classList.add('list');
-    containerList.appendChild(unsortedList);
+    container.appendChild(unsortedList);
 
-    const List = document.createElement('li');
-    List.classList.add('element');
-    unsortedList.appendChild(List);
+    const list = document.createElement('li');
+    unsortedList.appendChild(list);
 
-    const checkBox = document.createElement('input');
-    checkBox.classList.add('check');
-    checkBox.type = 'checkbox';
-    List.appendChild(checkBox);
+    const checkbox = document.createElement('input');
+    checkbox.classList.add('check');
+    checkbox.type = 'checkbox';
+    list.appendChild(checkbox);
 
-    const text = document.createElement('p');
-    text.classList.add('text');
-    text.textContent = `"${this.task}"`;
-    List.appendChild(text);
+    const span = document.createElement('span');
+    span.classList.add('span');
+    span.textContent = `${this.description}`;
+    list.appendChild(span);
 
-    const removeBtn = document.createElement('button');
-    removeBtn.classList.add('remove');
-    removeBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-    List.appendChild(removeBtn);
+    const removeicon = document.createElement('button');
+    removeicon.classList.add('remove');
+    removeicon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    list.appendChild(removeicon);
 
-    removeBtn.addEventListener('click', (e) => {
-      const parentBtn = e.target.ParentNode;
-      dataBase = dataBase.filter((x) => (x.task !== this.task));
-      parentBtn.parentElement.remove();
-
-      localStorage.setItem('baseData', JSON.stringify(dataBase));
-    });
   }
 }
 
 input.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter' && input.value) {
-    input = document.getElementById('input').value;
-    newTask = new Todolist(input);
-    newTask.addTask();
-    newTask.displayTask();
+  if (e.key === 'Enter' && input.value !== this.description) {
+    let todolist = new Todolist(description);
+    todolist.displaytask();
+    todolist.addtask();
   }
-  localStorage.setItem('baseData', JSON.stringify(dataBase));
 });
 
-if (localStorage.getItem('baseData')) {
-  dataBase = JSON.parse(localStorage.getItem('baseData'));
-  for (let i = 0; i < dataBase.length; i += 1) {
-    newTask = new Todolist(dataBase[i].task);
-    newTask.displayTask();
-  }
-}
+
