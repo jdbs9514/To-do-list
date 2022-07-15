@@ -2,32 +2,47 @@
 
 import './style.css';
 
-const dataBase = [];
+
 let newTask;
 const arrowBtn = document.getElementById('arrow');
 
 class Todolist {
-  constructor(description, completed) {
+  constructor(description, completed, index) {
     this.description = description;
     this.completed = completed;
-    this.index = 0;
+    this.index = index;
   }
 
-  countindex() {
-    for (let i = 0; i < this.index.length; i += 1){
-      return this.index++;
-    }
-  }
-
-  addtask() {
+  addtask(dataBase) {
     dataBase.push(this);
   }
 
-  displaytask() {
-    
-    const unsortedList = document.querySelector('.list');
+  
+}
+
+arrowBtn.addEventListener('click', () => {
+  const taskName = document.getElementById('input').value;
+  let dataBase = JSON.parse(localStorage.getItem('baseData'));
+  if (dataBase === null) {
+    dataBase = [];
+  }
+  const index = dataBase.length + 1;
+  newTask = new Todolist(taskName, false, index);
+  newTask.addtask(dataBase);
+  localStorage.setItem('baseData', JSON.stringify(dataBase));
+  document.location.reload();
+});
+
+function displaytask() {
+
+  let dataBase = JSON.parse(localStorage.getItem('baseData'));
+
+  const unsortedList = document.querySelector('.list');
+
+  for (let i = 0; i < dataBase.length; i += 1) {
 
     const list = document.createElement('li');
+    list.id = i+1;
     unsortedList.appendChild(list);
 
     const checkbox = document.createElement('input');
@@ -37,7 +52,7 @@ class Todolist {
 
     const span = document.createElement('span');
     span.classList.add('span');
-    span.textContent = `${this.description}`;
+    span.textContent = dataBase[i].description;
     list.appendChild(span);
 
     const removeicon = document.createElement('button');
@@ -46,12 +61,4 @@ class Todolist {
     list.appendChild(removeicon);
   }
 }
-
-arrowBtn.addEventListener('click', () => {
-  const taskName = document.getElementById('input').value;
-  newTask = new Todolist(taskName, false);
-  newTask.displaytask();
-  newTask.addtask();
-  newTask.countindex();
-  localStorage.setItem('baseData', JSON.stringify(dataBase));
-});
+displaytask();
