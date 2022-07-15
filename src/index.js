@@ -1,4 +1,5 @@
 // import _ from 'lodash';
+
 import './style.css';
 
 const dataBase = [];
@@ -6,10 +7,16 @@ let newTask;
 const arrowBtn = document.getElementById('arrow');
 
 class Todolist {
-  constructor(description, completed, index) {
+  constructor(description, completed) {
     this.description = description;
     this.completed = completed;
-    this.index = index;
+    this.index = 0;
+  }
+
+  countindex() {
+    for (let i = 0; i < this.index.length; i += 1){
+      return this.index++;
+    }
   }
 
   addtask() {
@@ -17,11 +24,8 @@ class Todolist {
   }
 
   displaytask() {
-    const container = document.getElementById('items');
-
-    const unsortedList = document.createElement('ul');
-    unsortedList.classList.add('list');
-    container.appendChild(unsortedList);
+    
+    const unsortedList = document.querySelector('.list');
 
     const list = document.createElement('li');
     unsortedList.appendChild(list);
@@ -45,9 +49,9 @@ class Todolist {
 
 arrowBtn.addEventListener('click', () => {
   const taskName = document.getElementById('input').value;
-  newTask = new Todolist(taskName);
+  newTask = new Todolist(taskName, false);
   newTask.displaytask();
   newTask.addtask();
-
+  newTask.countindex();
   localStorage.setItem('baseData', JSON.stringify(dataBase));
 });
