@@ -51,6 +51,8 @@ body {
   border-radius: 4px;
   outline: none;
   padding: 20px 40px;
+  border-right: none;
+  border-left: none;
 }
 
 #clear {
@@ -74,11 +76,21 @@ body {
 
 .list li {
   display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+  width: 70%;
+
 }
 
 .list button {
-  margin-left: 70%;
   background: none;
   border: none;
+  cursor: pointer;
+}
+
+#arrow {
+  background: none;
+  border: none;
+  margin-right: 5%;
   cursor: pointer;
 }

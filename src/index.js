@@ -1,8 +1,9 @@
 // import _ from 'lodash';
 import './style.css';
 
-let input = document.getElementById('input');
-let dataBase = [];
+const dataBase = [];
+let newTask;
+const arrowBtn = document.getElementById('arrow');
 
 class Todolist {
   constructor(description, completed, index) {
@@ -39,16 +40,14 @@ class Todolist {
     removeicon.classList.add('remove');
     removeicon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
     list.appendChild(removeicon);
-
   }
 }
 
-input.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter' && input.value !== this.description) {
-    let todolist = new Todolist(description);
-    todolist.displaytask();
-    todolist.addtask();
-  }
+arrowBtn.addEventListener('click', () => {
+  const taskName = document.getElementById('input').value;
+  newTask = new Todolist(taskName);
+  newTask.displaytask();
+  newTask.addtask();
+
+  localStorage.setItem('baseData', JSON.stringify(dataBase));
 });
-
-
