@@ -1,5 +1,6 @@
 // import _ from 'lodash';
-
+import { data } from 'browserslist';
+import database from 'mime-db';
 import './style.css';
 
 
@@ -59,6 +60,13 @@ function displaytask() {
     removeicon.classList.add('remove');
     removeicon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
     list.appendChild(removeicon);
+
+    removeicon.addEventListener('click', () => {
+      dataBase.splice(i, 1);
+      list.remove();
+
+      localStorage.setItem('baseData', JSON.stringify(dataBase));
+    });  
   }
 }
 displaytask();
