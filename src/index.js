@@ -1,8 +1,5 @@
 // import _ from 'lodash';
-import { data } from 'browserslist';
-import database from 'mime-db';
 import './style.css';
-
 
 let newTask;
 const arrowBtn = document.getElementById('arrow');
@@ -17,8 +14,6 @@ class Todolist {
   addtask(dataBase) {
     dataBase.push(this);
   }
-
-  
 }
 
 arrowBtn.addEventListener('click', () => {
@@ -35,15 +30,13 @@ arrowBtn.addEventListener('click', () => {
 });
 
 function displaytask() {
-
-  let dataBase = JSON.parse(localStorage.getItem('baseData'));
+  const dataBase = JSON.parse(localStorage.getItem('baseData'));
 
   const unsortedList = document.querySelector('.list');
 
   for (let i = 0; i < dataBase.length; i += 1) {
-
     const list = document.createElement('li');
-    list.id = i+1;
+    list.id = i + 1;
     unsortedList.appendChild(list);
 
     const checkbox = document.createElement('input');
@@ -66,7 +59,7 @@ function displaytask() {
       list.remove();
 
       localStorage.setItem('baseData', JSON.stringify(dataBase));
-    });  
+    });
   }
 }
 displaytask();
