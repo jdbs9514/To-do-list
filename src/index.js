@@ -3,6 +3,7 @@ import './style.css';
 
 let newTask;
 const arrowBtn = document.getElementById('arrow');
+const refresh = document.getElementById('refresh');
 
 class Todolist {
   constructor(description, completed, index) {
@@ -27,6 +28,7 @@ arrowBtn.addEventListener('click', () => {
   newTask.addtask(dataBase);
   localStorage.setItem('baseData', JSON.stringify(dataBase));
   document.location.reload();
+  document.preventDefault();
 });
 
 function displaytask() {
@@ -59,6 +61,9 @@ function displaytask() {
       list.remove();
 
       localStorage.setItem('baseData', JSON.stringify(dataBase));
+    });
+    refresh.addEventListener('click', () => {
+      unsortedList.remove();
     });
   }
 }
