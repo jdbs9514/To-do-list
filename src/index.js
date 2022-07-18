@@ -3,7 +3,6 @@ import './style.css';
 
 let newTask;
 const arrowBtn = document.getElementById('arrow');
-const refresh = document.getElementById('refresh');
 
 class Todolist {
   constructor(description, completed, index) {
@@ -16,14 +15,13 @@ class Todolist {
     dataBase.push(this);
   }
 }
-
 arrowBtn.addEventListener('click', () => {
   const taskName = document.getElementById('input').value;
   let dataBase = JSON.parse(localStorage.getItem('baseData'));
   if (dataBase === null) {
     dataBase = [];
   }
-  const index = dataBase.length + 1;
+  let index = dataBase.length + 1;
   newTask = new Todolist(taskName, false, index);
   newTask.addtask(dataBase);
   localStorage.setItem('baseData', JSON.stringify(dataBase));
@@ -46,9 +44,11 @@ function displaytask() {
     checkbox.type = 'checkbox';
     list.appendChild(checkbox);
 
-    const span = document.createElement('span');
+    const span = document.createElement('input');
+    span.classList.add('changes');
+    span.type = 'text';
     span.classList.add('span');
-    span.textContent = dataBase[i].description;
+    span.value = dataBase[i].description;
     list.appendChild(span);
 
     const removeicon = document.createElement('button');
@@ -56,15 +56,12 @@ function displaytask() {
     removeicon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
     list.appendChild(removeicon);
 
-    removeicon.addEventListener('click', () => {
-      dataBase.splice(i, 1);
+    removeicon.addEventListener('click', () => { 
+      dataBase.splice(i, 1,);
       list.remove();
-
       localStorage.setItem('baseData', JSON.stringify(dataBase));
-    });
-    refresh.addEventListener('click', () => {
-      unsortedList.remove();
     });
   }
 }
 displaytask();
+
