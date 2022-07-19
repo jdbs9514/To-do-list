@@ -15,6 +15,7 @@ clone this repo: https://github.com/jdbs9514/To-do-list.git
 
 - HTML
 - CSS
+- javaScript
 ## Author
 
 👤 **Josué Benavides**
