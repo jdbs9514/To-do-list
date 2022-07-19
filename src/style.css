@@ -93,3 +93,8 @@ body {
   margin-right: 5%;
   cursor: pointer;
 }
+
+.span {
+  border: none;
+  outline: none;
+}

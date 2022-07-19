@@ -3,7 +3,6 @@ import './style.css';
 
 let newTask;
 const arrowBtn = document.getElementById('arrow');
-const refresh = document.getElementById('refresh');
 
 class Todolist {
   constructor(description, completed, index) {
@@ -46,9 +45,10 @@ function displaytask() {
     checkbox.type = 'checkbox';
     list.appendChild(checkbox);
 
-    const span = document.createElement('span');
+    const span = document.createElement('input');
     span.classList.add('span');
-    span.textContent = dataBase[i].description;
+    span.type = 'text';
+    span.value = dataBase[i].description;
     list.appendChild(span);
 
     const removeicon = document.createElement('button');
@@ -59,11 +59,10 @@ function displaytask() {
     removeicon.addEventListener('click', () => {
       dataBase.splice(i, 1);
       list.remove();
-
+      for (let i = 0; i < dataBase.length; i += 1) {
+        dataBase[i].index = i + 1;
+      }
       localStorage.setItem('baseData', JSON.stringify(dataBase));
-    });
-    refresh.addEventListener('click', () => {
-      unsortedList.remove();
     });
   }
 }
