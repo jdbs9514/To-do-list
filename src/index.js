@@ -1,17 +1,17 @@
 // import _ from 'lodash';
 import './style.css';
-import {clearButton, arrowBtn} from "./modules/variables.js";
+import { clearButton, arrowBtn } from './modules/variables.js';
 
 let newTask;
 class Todolist {
   constructor(description, completed, index) {
-      this.description = description;
-      this.completed = completed;
-      this.index = index;
+    this.description = description;
+    this.completed = completed;
+    this.index = index;
   }
 
   addtask(dataBase) {
-      dataBase.push(this);
+    dataBase.push(this);
   }
 }
 
@@ -19,7 +19,7 @@ arrowBtn.addEventListener('click', () => {
   const taskName = document.getElementById('input').value;
   let dataBase = JSON.parse(localStorage.getItem('baseData'));
   if (dataBase === null) {
-      dataBase = [];
+    dataBase = [];
   }
   const index = dataBase.length + 1;
   newTask = new Todolist(taskName, false, index);
@@ -29,73 +29,64 @@ arrowBtn.addEventListener('click', () => {
   document.preventDefault();
 });
 
-
 function displaytask() {
   const dataBase = JSON.parse(localStorage.getItem('baseData'));
 
   const unsortedList = document.querySelector('.list');
 
   for (let i = 0; i < dataBase.length; i += 1) {
-      const list = document.createElement('li');
-      list.id = i + 1;
-      unsortedList.appendChild(list);
+    const list = document.createElement('li');
+    list.id = i + 1;
+    unsortedList.appendChild(list);
 
-      const checkbox = document.createElement('input');
-      checkbox.classList.add('check');
-      checkbox.type = 'checkbox';
-      list.appendChild(checkbox);
+    const checkbox = document.createElement('input');
+    checkbox.classList.add('check');
+    checkbox.type = 'checkbox';
+    list.appendChild(checkbox);
 
-      let span = document.createElement('input');
-      span.classList.add('span');
-      span.type = 'text';
-      span.value = dataBase[i].description;
-      list.appendChild(span);
+    const span = document.createElement('input');
+    span.classList.add('span');
+    span.type = 'text';
+    span.value = dataBase[i].description;
+    list.appendChild(span);
 
-      const removeicon = document.createElement('button');
-      removeicon.classList.add('remove');
-      removeicon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-      list.appendChild(removeicon);
+    const removeicon = document.createElement('button');
+    removeicon.classList.add('remove');
+    removeicon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    list.appendChild(removeicon);
 
-      removeicon.addEventListener('click', () => {
-          dataBase.splice(i, 1);
-          list.remove();
-          for (let i = 0; i < dataBase.length; i += 1) {
-              dataBase[i].index = i + 1;
-          }
-          localStorage.setItem('baseData', JSON.stringify(dataBase));
-      });
+    removeicon.addEventListener('click', () => {
+      dataBase.splice(i, 1);
+      list.remove();
+      for (let i = 0; i < dataBase.length; i += 1) {
+        dataBase[i].index = i + 1;
+      }
+      localStorage.setItem('baseData', JSON.stringify(dataBase));
+    });
 
-      span.addEventListener('change', () => {
-          dataBase.forEach((o) => o.description = span.value);
-          localStorage.setItem('baseData', JSON.stringify(dataBase));
-      });
+    span.addEventListener('change', () => {
+      localStorage.setItem('baseData', JSON.stringify(dataBase));
+    });
 
-      checkbox.addEventListener('change', () => {
-          if (checkbox.checked) {
-              dataBase[i].completed = true;
-          } else {
-              dataBase[i].completed = false;
-          }
-          localStorage.setItem('baseData', JSON.stringify(dataBase));
-      })
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        dataBase[i].completed = true;
+      } else {
+        dataBase[i].completed = false;
+      }
+      localStorage.setItem('baseData', JSON.stringify(dataBase));
+    });
 
-      clearButton.addEventListener('click', () => {
-          if (checkbox.checked || this.completed) {
-              dataBase.splice(i, 1);
-              list.remove();
-          }
-          for (let i = 0; i < dataBase.length; i += 1) {
-              dataBase[i].index = i + 1;
-          }
-          localStorage.setItem('basData', JSON.stringify(dataBase));
-      })
+    clearButton.addEventListener('click', () => {
+      if (checkbox.checked || this.completed) {
+        dataBase.splice(i, 1);
+        list.remove();
+      }
+      for (let i = 0; i < dataBase.length; i += 1) {
+        dataBase[i].index = i + 1;
+      }
+      localStorage.setItem('basData', JSON.stringify(dataBase));
+    });
   }
-
 }
 displaytask();
-
-
-
-
-
-
