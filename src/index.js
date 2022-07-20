@@ -1,4 +1,5 @@
 // import _ from 'lodash';
+
 import './style.css';
 
 let newTask;
@@ -45,7 +46,7 @@ function displaytask() {
     checkbox.type = 'checkbox';
     list.appendChild(checkbox);
 
-    const span = document.createElement('input');
+    let span = document.createElement('input');
     span.classList.add('span');
     span.type = 'text';
     span.value = dataBase[i].description;
@@ -64,6 +65,16 @@ function displaytask() {
       }
       localStorage.setItem('baseData', JSON.stringify(dataBase));
     });
-  }
+
+    span.addEventListener('change', () => {
+      span.textContent = dataBase[i].description;
+      if(span.textContent === dataBase[i].description){
+        span.textContent = span.value;
+      }
+      localStorage.setItem('baseData', JSON.stringify(dataBase));
+    });
+  }  
 }
 displaytask();
+
+
