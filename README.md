@@ -11,6 +11,10 @@ In this project, i will build a simple HTML list of To Do tasks. The list will b
 
 clone this repo: https://github.com/jdbs9514/To-do-list.git
 
+## Live Demo
+
+ https://jdbs9514.github.io/To-do-list/
+
 ## Built with 
 
 - HTML
