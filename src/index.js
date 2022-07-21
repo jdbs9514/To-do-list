@@ -65,6 +65,10 @@ function displaytask() {
     });
 
     span.addEventListener('change', () => {
+      dataBase.forEach((o) => {
+        o.description = span.value;
+      });
+
       localStorage.setItem('baseData', JSON.stringify(dataBase));
     });
 
@@ -77,16 +81,13 @@ function displaytask() {
       localStorage.setItem('baseData', JSON.stringify(dataBase));
     });
 
-    clearButton.addEventListener('click', () => {
-      if (checkbox.checked || this.completed) {
-        dataBase.splice(i, 1);
-        list.remove();
-      }
-      for (let i = 0; i < dataBase.length; i += 1) {
-        dataBase[i].index = i + 1;
-      }
-      localStorage.setItem('basData', JSON.stringify(dataBase));
-    });
+    // ``clearButton.addEventListener('click', () => {
+    //   if (checkbox.checked) {
+    //     list.remove();
+    //   }
+    //   localStorage.setItem('basData', JSON.stringify(dataBase));
+    // });``
   }
 }
+
 displaytask();
