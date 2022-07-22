@@ -71,15 +71,16 @@ function displaytask() {
           newInput.description = span.value;
         }
       });
-
       localStorage.setItem('baseData', JSON.stringify(dataBase));
     });
 
     checkbox.addEventListener('change', () => {
       if (checkbox.checked) {
         dataBase[i].completed = true;
+        alert('Task completed');
       } else {
         dataBase[i].completed = false;
+        alert('Here we go!');
       }
       localStorage.setItem('baseData', JSON.stringify(dataBase));
     });
