@@ -1,9 +1,8 @@
 // import _ from 'lodash';
 import './style.css';
+import { clearButton, arrowBtn } from './modules/variables.js';
 
 let newTask;
-const arrowBtn = document.getElementById('arrow');
-
 class Todolist {
   constructor(description, completed, index) {
     this.description = description;
@@ -64,6 +63,39 @@ function displaytask() {
       }
       localStorage.setItem('baseData', JSON.stringify(dataBase));
     });
+
+    span.addEventListener('change', () => {
+      const index = i;
+      dataBase.forEach((newInput, i) => {
+        if (index === i) {
+          newInput.description = span.value;
+        }
+      });
+      localStorage.setItem('baseData', JSON.stringify(dataBase));
+    });
+
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        dataBase[i].completed = true;
+        alert('Task completed');
+      } else {
+        dataBase[i].completed = false;
+        alert('Here we go!');
+      }
+      localStorage.setItem('baseData', JSON.stringify(dataBase));
+    });
+
+    clearButton.addEventListener('click', () => {
+      if (checkbox.checked && true) {
+        dataBase.splice(i, 1);
+        list.remove();
+        for (let i = 0; i < dataBase.length; i += 1) {
+          dataBase[i].index = i + 1;
+        }
+        localStorage.setItem('baseData', JSON.stringify(dataBase));
+      }
+    });
   }
 }
+
 displaytask();
