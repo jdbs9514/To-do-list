@@ -13,7 +13,7 @@ clone this repo: https://github.com/jdbs9514/To-do-list.git
 
 ## Live Demo
 
- [Website] (https://jdbs9514.github.io/To-do-list/)
+ (https://jdbs9514.github.io/To-do-list/)
 
 ## Built with 
 
